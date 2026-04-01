@@ -433,8 +433,10 @@ function setupEasyMode(data) {
         const imageFile = imageMap[choiceKey];
         
         if (imageFile) {
-            btn.querySelector('.choice-img').src = `assets/images/${imageFile}.jpg`;
-            btn.querySelector('.choice-img').style.display = 'block';
+            const img = btn.querySelector('.choice-img');
+            img.src = `assets/images/${imageFile}.jpg?v=2`;
+            img.alt = choice.text;
+            img.style.display = 'block';
             btn.querySelector('.choice-emoji').style.display = 'none';
         } else {
             // No image, show large emoji instead
