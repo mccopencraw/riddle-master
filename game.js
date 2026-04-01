@@ -370,7 +370,8 @@ function checkAnswer(selected, correct, btn) {
     // Disable all buttons
     document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
     
-    setTimeout(() => showFeedback(isCorrect, gameData[currentLevel][currentQuestion]), 500);
+    // Use shuffledQuestions to get correct data
+    setTimeout(() => showFeedback(isCorrect, shuffledQuestions[currentQuestion]), 500);
 }
 
 // Preload images to avoid showing previous image
