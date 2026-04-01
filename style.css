@@ -68,6 +68,16 @@ h1 {
     animation: bounce 2s infinite;
 }
 
+.mascot-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 20px 0;
+    animation: bounce 2s infinite;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
