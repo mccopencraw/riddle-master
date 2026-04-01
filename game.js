@@ -110,6 +110,127 @@ const gameData = {
                 { text: "Fox", emoji: "🦊" },
                 { text: "Wolf", emoji: "🐺" }
             ]
+        },
+        {
+            riddle: "I have four legs and say 'meow'.\nI like catching mice.\nWhat am I?",
+            answer: "Cat",
+            image: "assets/images/cat.jpg",
+            choices: [
+                { text: "Cat", emoji: "🐱" },
+                { text: "Dog", emoji: "🐕" },
+                { text: "Rabbit", emoji: "🐰" },
+                { text: "Tiger", emoji: "🐯" }
+            ]
+        },
+        {
+            riddle: "I am an animal.\nI have a long trunk and big ears.\nWhat am I?",
+            answer: "Elephant",
+            image: "assets/images/elephant.jpg",
+            choices: [
+                { text: "Elephant", emoji: "🐘" },
+                { text: "Giraffe", emoji: "🦒" },
+                { text: "Hippo", emoji: "🦛" },
+                { text: "Rhino", emoji: "🦏" }
+            ]
+        },
+        {
+            riddle: "I am a big yellow star.\nI give you light and keep you warm.\nWhat am I?",
+            answer: "Sun",
+            image: "assets/images/sun.jpg",
+            choices: [
+                { text: "Sun", emoji: "☀️" },
+                { text: "Moon", emoji: "🌙" },
+                { text: "Star", emoji: "⭐" },
+                { text: "Cloud", emoji: "☁️" }
+            ]
+        },
+        {
+            riddle: "I have seven colors.\nYou can see me in the sky after the rain.\nWhat am I?",
+            answer: "Rainbow",
+            image: "assets/images/rainbow.jpg",
+            choices: [
+                { text: "Rainbow", emoji: "🌈" },
+                { text: "Cloud", emoji: "☁️" },
+                { text: "Sun", emoji: "☀️" },
+                { text: "Bird", emoji: "🐦" }
+            ]
+        },
+        {
+            riddle: "What falls in winter but never gets hurt?",
+            answer: "Snow",
+            image: "assets/images/snow.jpg",
+            choices: [
+                { text: "Snow", emoji: "❄️" },
+                { text: "Rain", emoji: "🌧️" },
+                { text: "Ice", emoji: "🧊" },
+                { text: "Wind", emoji: "💨" }
+            ]
+        },
+        {
+            riddle: "What has to be broken before you can use it or eat it?",
+            answer: "Egg",
+            image: "assets/images/egg.jpg",
+            choices: [
+                { text: "Egg", emoji: "🥚" },
+                { text: "Nut", emoji: "🥜" },
+                { text: "Apple", emoji: "🍎" },
+                { text: "Banana", emoji: "🍌" }
+            ]
+        },
+        {
+            riddle: "I am cold and sweet.\nYou love eating me in the summer.\nWhat am I?",
+            answer: "Ice cream",
+            image: "assets/images/ice-cream.jpg",
+            choices: [
+                { text: "Ice cream", emoji: "🍦" },
+                { text: "Cake", emoji: "🎂" },
+                { text: "Candy", emoji: "🍬" },
+                { text: "Chocolate", emoji: "🍫" }
+            ]
+        },
+        {
+            riddle: "What starts with T, ends with T,\nand has T (tea) in it?",
+            answer: "Teapot",
+            image: "assets/images/teapot.jpg",
+            choices: [
+                { text: "Teapot", emoji: "🫖" },
+                { text: "Table", emoji: "🪑" },
+                { text: "Tent", emoji: "⛺" },
+                { text: "Toast", emoji: "🍞" }
+            ]
+        },
+        {
+            riddle: "I am tall when I am young,\nand I am short when I am old.\nWhat am I?",
+            answer: "Pencil",
+            image: "assets/images/pencil.jpg",
+            choices: [
+                { text: "Pencil", emoji: "✏️" },
+                { text: "Pen", emoji: "🖊️" },
+                { text: "Crayon", emoji: "🖍️" },
+                { text: "Ruler", emoji: "📏" }
+            ]
+        },
+        {
+            riddle: "What has legs, but cannot walk?",
+            answer: "Table",
+            image: "assets/images/table.jpg",
+            choices: [
+                { text: "Table", emoji: "🪑" },
+                { text: "Chair", emoji: "🪑" },
+                { text: "Bed", emoji: "🛏️" },
+                { text: "Shelf", emoji: "🗄️" }
+            ]
+        },
+        {
+            riddle: "I have a tail and a head,\nbut no body.\nWhat am I?",
+            answer: "Coin",
+            image: "assets/images/coin.jpg",
+            choices: [
+                { text: "Coin", emoji: "🪙" },
+                { text: "Button", emoji: "🔘" },
+                { text: "Ring", emoji: "💍" },
+                { text: "Ball", emoji: "⚽" }
+            ]
         }
     ],
     medium: [
@@ -122,7 +243,18 @@ const gameData = {
         { riddle: "Monkeys love to eat me.\nI'm yellow and curved.\nWhat am I?", answer: "BANANA", letters: "A A N N B A" },
         { riddle: "I light up the night.\nI have wings but not a plane.\nWhat am I?", answer: "FIREFLY", letters: "Y F R F L E I" },
         { riddle: "You kick me in a game.\nI bounce, bounce!\nWhat am I?", answer: "FOOTBALL", letters: "L L A B T O O F" },
-        { riddle: "I say 'woof woof!'\nI chase cats.\nWhat am I?", answer: "DOG", letters: "G O D" }
+        { riddle: "I say 'woof woof!'\nI chase cats.\nWhat am I?", answer: "DOG", letters: "G O D" },
+        { riddle: "I say 'meow' and catch mice.\nWhat am I?", answer: "CAT", letters: "T A C" },
+        { riddle: "I have a long trunk and big ears.\nWhat am I?", answer: "ELEPHANT", letters: "T N A H P E L E" },
+        { riddle: "I give you light and keep you warm.\nWhat am I?", answer: "SUN", letters: "N U S" },
+        { riddle: "I have seven colors in the sky.\nWhat am I?", answer: "RAINBOW", letters: "W O B N I A R" },
+        { riddle: "I fall in winter but never get hurt.\nWhat am I?", answer: "SNOW", letters: "W O N S" },
+        { riddle: "Break me before you eat me.\nWhat am I?", answer: "EGG", letters: "G G E" },
+        { riddle: "Cold and sweet, eat me in summer.\nWhat am I?", answer: "ICECREAM", letters: "M A E R C E C I" },
+        { riddle: "Starts with T, ends with T, has tea in it.\nWhat am I?", answer: "TEAPOT", letters: "T O P A E T" },
+        { riddle: "Tall when young, short when old.\nWhat am I?", answer: "PENCIL", letters: "L I C N E P" },
+        { riddle: "I have legs but cannot walk.\nWhat am I?", answer: "TABLE", letters: "E L B A T" },
+        { riddle: "I have a tail and head, but no body.\nWhat am I?", answer: "COIN", letters: "N I O C" }
     ]
 };
 
@@ -274,7 +406,7 @@ function setupEasyMode(data) {
         const choice = shuffledChoices[index];
         // Check if we have an image for this choice
         const choiceKey = choice.text.toLowerCase().replace(/ /g, '-');
-        const availableImages = ['apple', 'kettle', 'teddy-bear', 'clock', 'frog', 'toothbrush', 'banana', 'firefly', 'football', 'dog'];
+        const availableImages = ['apple', 'kettle', 'teddy-bear', 'clock', 'frog', 'toothbrush', 'banana', 'firefly', 'football', 'dog', 'cat', 'elephant', 'sun', 'rainbow', 'snow', 'egg', 'ice-cream', 'teapot', 'pencil', 'table', 'coin'];
         
         if (availableImages.includes(choiceKey)) {
             btn.querySelector('.choice-img').src = `assets/images/${choiceKey}.jpg`;
