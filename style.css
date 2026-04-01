@@ -833,7 +833,8 @@ h1 {
 /* Responsive */
 @media (max-width: 600px) {
     .choices-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
     
     .sticker-album {
