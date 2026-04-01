@@ -406,15 +406,40 @@ function setupEasyMode(data) {
         const choice = shuffledChoices[index];
         // Check if we have an image for this choice
         const choiceKey = choice.text.toLowerCase().replace(/ /g, '-');
-        const availableImages = ['apple', 'kettle', 'teddy-bear', 'clock', 'frog', 'toothbrush', 'banana', 'firefly', 'football', 'dog', 'cat', 'elephant', 'sun', 'rainbow', 'snow', 'egg', 'ice-cream', 'teapot', 'pencil', 'table', 'coin'];
+        // Map choice key to image filename (some don't match exactly)
+        const imageMap = {
+            'apple': 'apple',
+            'kettle': 'kettle',
+            'teddy-bear': 'teddy',
+            'clock': 'clock',
+            'frog': 'frog',
+            'toothbrush': 'toothbrush',
+            'banana': 'banana',
+            'firefly': 'firefly',
+            'football': 'football',
+            'dog': 'dog',
+            'cat': 'cat',
+            'elephant': 'elephant',
+            'sun': 'sun',
+            'rainbow': 'rainbow',
+            'snow': 'snow',
+            'egg': 'egg',
+            'ice-cream': 'ice-cream',
+            'teapot': 'teapot',
+            'pencil': 'pencil',
+            'table': 'table',
+            'coin': 'coin'
+        };
+        const imageFile = imageMap[choiceKey];
         
-        if (availableImages.includes(choiceKey)) {
-            btn.querySelector('.choice-img').src = `assets/images/${choiceKey}.jpg`;
+        if (imageFile) {
+            btn.querySelector('.choice-img').src = `assets/images/${imageFile}.jpg`;
             btn.querySelector('.choice-img').style.display = 'block';
-            btn.querySelector('.choice-emoji').textContent = '';
+            btn.querySelector('.choice-emoji').style.display = 'none';
         } else {
             // No image, show large emoji instead
             btn.querySelector('.choice-img').style.display = 'none';
+            btn.querySelector('.choice-emoji').style.display = 'block';
             btn.querySelector('.choice-emoji').textContent = choice.emoji;
         }
         
