@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riddle Master - English Brain Teasers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+        <div class="container">
+            <h1>🎮 Riddle Master</h1>
+            <p class="subtitle">English Brain Teasers for Kids!</p>
+            <div class="mascot">🧙‍♂️</div>
+            <p class="welcome-text">Welcome! Ready to solve riddles and collect stickers?</p>
+            <div class="level-select">
+                <h3>Choose Your Level:</h3>
+                <button class="level-btn" data-level="easy">
+                    <span class="level-emoji">⭐</span>
+                    <span class="level-name">Easy</span>
+                    <span class="level-desc">4 Choices with Pictures</span>
+                </button>
+                <button class="level-btn" data-level="medium">
+                    <span class="level-emoji">🎯</span>
+                    <span class="level-name">Medium</span>
+                    <span class="level-desc">Unscramble Letters</span>
+                </button>
+            </div>
+            <p class="warning">⚠️ Complete all 10 questions to earn stickers!<br>Leaving early = No prizes!</p>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <div class="game-header">
+            <span id="level-indicator">⭐ Easy Level</span>
+            <span id="progress">Question 1/10</span>
+            <span id="score">Score: 0</span>
+        </div>
+        
+        <div class="game-container">
+            <button id="replay-btn" class="replay-btn">🔊 Replay</button>
+            
+            <div class="riddle-box">
+                <p id="riddle-text">Loading...</p>
+            </div>
+            
+            <!-- Easy Level: 4 Choices -->
+            <div id="easy-mode" class="mode-container">
+                <div class="choices-grid">
+                    <button class="choice-btn" data-answer="0">
+                        <img class="choice-img" src="" alt="">
+                        <span class="choice-text"></span>
+                    </button>
+                    <button class="choice-btn" data-answer="1">
+                        <img class="choice-img" src="" alt="">
+                        <span class="choice-text"></span>
+                    </button>
+                    <button class="choice-btn" data-answer="2">
+                        <img class="choice-img" src="" alt="">
+                        <span class="choice-text"></span>
+                    </button>
+                    <button class="choice-btn" data-answer="3">
+                        <img class="choice-img" src="" alt="">
+                        <span class="choice-text"></span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Medium Level: Jumble Letters -->
+            <div id="medium-mode" class="mode-container hidden">
+                <div class="jumble-container">
+                    <div class="answer-slots"></div>
+                    <div class="letter-pool"></div>
+                    <div class="jumble-controls">
+                        <button id="check-btn" class="control-btn">✓ Check</button>
+                        <button id="reset-btn" class="control-btn">🔄 Reset</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="focus-reminder">
+                <span>⚠️ Keep going! Don't leave or you'll lose your progress!</span>
+            </div>
+        </div>
+        
+        <!-- Exit Warning Modal -->
+        <div id="exit-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>⚠️ Wait!</h2>
+                <p>If you leave now:</p>
+                <ul>
+                    <li>❌ Score will be reset to 0</li>
+                    <li>❌ No stickers earned</li>
+                    <li>❌ Must start over</li>
+                </ul>
+                <p class="encourage">You're doing great! Keep going! 💪</p>
+                <div class="modal-buttons">
+                    <button id="continue-btn" class="primary-btn">Continue Playing</button>
+                    <button id="leave-btn" class="danger-btn">Leave Anyway</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Screen -->
+    <div id="feedback-screen" class="screen">
+        <div class="feedback-container">
+            <div id="feedback-emoji" class="feedback-emoji">🎉</div>
+            <h2 id="feedback-title">Correct!</h2>
+            <div id="answer-reveal" class="answer-reveal">
+                <img id="answer-img" src="" alt="">
+                <p id="answer-text"></p>
+            </div>
+            <div id="confetti-container"></div>
+            <button id="next-btn" class="primary-btn">Next →</button>
+        </div>
+    </div>
+
+    <!-- Store Screen -->
+    <div id="store-screen" class="screen">
+        <div class="store-container">
+            <h1>🎉 Game Complete! 🎉</h1>
+            <div class="final-score">
+                <p>Your Score: <span id="final-score-val">0</span>/100</p>
+                <div id="star-rating" class="star-rating"></div>
+                <p id="rating-text"></p>
+            </div>
+            
+            <div class="sticker-reward">
+                <h2>You earned <span id="sticker-count">0</span> stickers!</h2>
+                <div id="sticker-boxes" class="sticker-boxes">
+                    <!-- Mystery boxes -->
+                </div>
+                <button id="open-all-btn" class="primary-btn">🎲 Open All Stickers!</button>
+            </div>
+            
+            <div id="sticker-reveal" class="sticker-reveal hidden">
+                <h3>🎊 You got:</h3>
+                <div id="sticker-results" class="sticker-results"></div>
+                <button id="view-collection-btn" class="primary-btn">View My Collection</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collection Screen -->
+    <div id="collection-screen" class="screen">
+        <div class="collection-container">
+            <h1>📚 My Sticker Collection</h1>
+            <p>Total Stickers: <span id="total-stickers">0</span></p>
+            <div id="sticker-album" class="sticker-album"></div>
+            
+            <div class="decorate-section">
+                <h3>Decorate Your Profile:</h3>
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <span class="profile-avatar">🧙‍♂️</span>
+                        <span class="profile-name">Riddle Master</span>
+                    </div>
+                    <div id="profile-stickers" class="profile-stickers">
+                        <p class="placeholder">Drag stickers here to decorate!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collection-buttons">
+                <button id="play-again-btn" class="primary-btn">Play Again</button>
+                <button id="change-level-btn" class="secondary-btn">Change Level</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
