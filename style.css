@@ -613,11 +613,76 @@ h1 {
     justify-content: center;
     font-size: 40px;
     animation: pulse 1.5s infinite;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: visible;
+}
+
+.mystery-box.opening {
+    animation: boxShake 0.6s ease-in-out;
+}
+
+.mystery-box.opened {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    animation: none;
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
 }
 
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
+}
+
+@keyframes boxShake {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    15% { transform: rotate(-15deg) scale(1.1); }
+    30% { transform: rotate(15deg) scale(1.1); }
+    45% { transform: rotate(-15deg) scale(1.1); }
+    60% { transform: rotate(15deg) scale(1.1); }
+    75% { transform: rotate(-10deg) scale(1.05); }
+    90% { transform: rotate(10deg) scale(1.05); }
+}
+
+.sticker-reveal {
+    font-size: 50px;
+    animation: stickerPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes stickerPop {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.4) rotate(15deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.sparkle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparklePop 0.6s ease-out forwards;
+}
+
+@keyframes sparklePop {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--tx, 30px)), calc(-50% + var(--ty, -30px))) scale(0);
+        opacity: 0;
+    }
 }
 
 .sticker-reveal {

@@ -139,6 +139,7 @@ let score = 0;
 let stickers = [];
 let jumbleAnswer = [];
 let gameCompleted = false;
+let shuffledQuestions = []; // Store shuffled questions
 
 // DOM Elements
 const screens = {
@@ -189,12 +190,25 @@ function switchScreen(screenName) {
     screens[screenName].classList.add('active');
 }
 
+// Shuffle array helper
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
 function startGame(level) {
     currentLevel = level;
     currentQuestion = 0;
     score = 0;
     gameCompleted = false;
     stickers = [];
+    
+    // Shuffle questions for random order
+    shuffledQuestions = shuffleArray(gameData[level]);
 
     // Update UI
     document.getElementById('level-indicator').textContent = 
@@ -207,7 +221,7 @@ function startGame(level) {
 }
 
 function loadQuestion() {
-    const data = gameData[currentLevel][currentQuestion];
+    const data = shuffledQuestions[currentQuestion];
     
     // Update progress
     document.getElementById('progress').textContent = `Question ${currentQuestion + 1}/10`;
@@ -228,8 +242,12 @@ function loadQuestion() {
 
 function setupEasyMode(data) {
     const buttons = document.querySelectorAll('.choice-btn');
+    
+    // Shuffle choices so answer is not always first
+    const shuffledChoices = shuffleArray(data.choices);
+    
     buttons.forEach((btn, index) => {
-        const choice = data.choices[index];
+        const choice = shuffledChoices[index];
         btn.querySelector('.choice-img').src = ''; // Would set actual image
         btn.querySelector('.choice-text').textContent = choice.text;
         btn.querySelector('.choice-img').alt = choice.text;
@@ -305,7 +323,7 @@ function resetJumble() {
 }
 
 function checkJumbleAnswer() {
-    const data = gameData[currentLevel][currentQuestion];
+    const data = shuffledQuestions[currentQuestion];
     const userAnswer = jumbleAnswer.map(j => j.letter).join('');
     
     if (userAnswer === data.answer) {
@@ -407,25 +425,88 @@ function completeGame() {
 function openAllStickers() {
     const stickerCount = parseInt(document.getElementById('sticker-count').textContent);
     const resultsContainer = document.getElementById('sticker-results');
+    const boxesContainer = document.getElementById('sticker-boxes');
+    
     resultsContainer.innerHTML = '';
     
-    // Random stickers
-    for (let i = 0; i < stickerCount; i++) {
-        const randomSticker = stickerPool[Math.floor(Math.random() * stickerPool.length)];
-        stickers.push(randomSticker);
+    // Animate each box opening
+    const boxes = boxesContainer.querySelectorAll('.mystery-box');
+    
+    boxes.forEach((box, index) => {
+        setTimeout(() => {
+            // Random sticker for this box
+            const randomSticker = stickerPool[Math.floor(Math.random() * stickerPool.length)];
+            stickers.push(randomSticker);
+            
+            // Create opening animation
+            box.classList.add('opening');
+            box.innerHTML = '🎁';
+            
+            // After box shake, reveal sticker
+            setTimeout(() => {
+                box.innerHTML = '';
+                box.classList.remove('opening');
+                box.classList.add('opened');
+                
+                // Create sticker element with pop animation
+                const stickerEl = document.createElement('div');
+                stickerEl.className = 'sticker-reveal';
+                stickerEl.textContent = randomSticker;
+                box.appendChild(stickerEl);
+                
+                // Add to results
+                const resultEl = document.createElement('div');
+                resultEl.className = 'sticker-item';
+                resultEl.textContent = randomSticker;
+                resultsContainer.appendChild(resultEl);
+                
+                // Sparkle effect
+                createSparkles(box);
+                
+            }, 600); // Wait for box shake animation
+            
+        }, index * 800); // Stagger each box opening
+    });
+    
+    // Show results after all boxes opened
+    setTimeout(() => {
+        document.getElementById('sticker-reveal').classList.remove('hidden');
+        document.getElementById('open-all-btn').classList.add('hidden');
+        playSound('win');
+        saveProgress();
+    }, stickerCount * 800 + 1000);
+}
+
+// Sparkle effect for box opening
+function createSparkles(element) {
+    const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'];
+    
+    for (let i = 0; i < 8; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.cssText = `
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            border-radius: 50%;
+            pointer-events: none;
+            left: 50%;
+            top: 50%;
+        `;
         
-        const stickerEl = document.createElement('div');
-        stickerEl.className = 'sticker-item';
-        stickerEl.textContent = randomSticker;
-        stickerEl.style.animationDelay = `${i * 0.2}s`;
-        resultsContainer.appendChild(stickerEl);
+        const angle = (i / 8) * Math.PI * 2;
+        const distance = 50 + Math.random() * 30;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        
+        sparkle.style.animation = `sparklePop 0.6s ease-out forwards`;
+        sparkle.style.setProperty('--tx', `${tx}px`);
+        sparkle.style.setProperty('--ty', `${ty}px`);
+        
+        element.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 600);
     }
-    
-    document.getElementById('sticker-reveal').classList.remove('hidden');
-    document.getElementById('open-all-btn').classList.add('hidden');
-    
-    playSound('win');
-    saveProgress();
 }
 
 function showCollection() {
