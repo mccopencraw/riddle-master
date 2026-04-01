@@ -270,6 +270,11 @@ h1 {
     font-weight: bold;
 }
 
+.choice-emoji {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
 /* Medium Mode - Jumble */
 .jumble-container {
     background: white;

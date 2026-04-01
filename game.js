@@ -272,9 +272,21 @@ function setupEasyMode(data) {
     
     buttons.forEach((btn, index) => {
         const choice = shuffledChoices[index];
-        btn.querySelector('.choice-img').src = ''; // Would set actual image
+        // Check if we have an image for this choice
+        const choiceKey = choice.text.toLowerCase().replace(/ /g, '-');
+        const availableImages = ['apple', 'kettle', 'teddy-bear', 'clock', 'frog', 'toothbrush', 'banana', 'firefly', 'football', 'dog'];
+        
+        if (availableImages.includes(choiceKey)) {
+            btn.querySelector('.choice-img').src = `assets/images/${choiceKey}.jpg`;
+            btn.querySelector('.choice-img').style.display = 'block';
+            btn.querySelector('.choice-emoji').textContent = '';
+        } else {
+            // No image, show large emoji instead
+            btn.querySelector('.choice-img').style.display = 'none';
+            btn.querySelector('.choice-emoji').textContent = choice.emoji;
+        }
+        
         btn.querySelector('.choice-text').textContent = choice.text;
-        btn.querySelector('.choice-img').alt = choice.text;
         btn.classList.remove('correct', 'wrong');
         btn.disabled = false;
         
