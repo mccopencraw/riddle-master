@@ -126,11 +126,35 @@ const gameData = {
     ]
 };
 
-// Sticker Collection
+// Sticker Collection - Expanded pool for true randomness
 const stickerPool = [
     "🦁", "🚀", "🌈", "🎂", "🐶", "🌸", "⭐", "🍕", "🎸", "🎈",
-    "🌙", "🦋", "🦄", "🌟", "🎨", "🎭", "🎪", "🎬", "🎤", "🎧"
+    "🌙", "🦋", "🦄", "🌟", "🎨", "🎭", "🎪", "🎬", "🎤", "🎧",
+    "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🐷",
+    "🐸", "🐙", "🐵", "🐔", "🐧", "🐦", "🦆", "🦅", "🦉", "🦇",
+    "🐺", "🐗", "🐴", "🦄", "🐝", "🐛", "🦋", "🐌", "🐞", "🐜",
+    "⚽", "🏀", "🏈", "⚾", "🎾", "🏐", "🏉", "🎱", "🏓", "🏸",
+    "🎰", "🎲", "🎯", "🏆", "🎖️", "🏅", "🥇", "🥈", "🥉", "🏵️",
+    "🎪", "🎭", "🎨", "🎬", "🎤", "🎧", "🎼", "🎹", "🥁", "🎷",
+    "🎺", "🎸", "🎻", "🪕", "🎮", "🎰", "🎲", "🧩", "🧸", "🪀"
 ];
+
+// Get random sticker with weighted rarity
+function getRandomSticker() {
+    const rand = Math.random();
+    let pool;
+    
+    // 70% common, 20% uncommon, 10% rare
+    if (rand < 0.7) {
+        pool = stickerPool.slice(0, 40); // Common
+    } else if (rand < 0.9) {
+        pool = stickerPool.slice(40, 70); // Uncommon
+    } else {
+        pool = stickerPool.slice(70); // Rare
+    }
+    
+    return pool[Math.floor(Math.random() * pool.length)];
+}
 
 // Game State
 let currentLevel = '';
@@ -434,8 +458,8 @@ function openAllStickers() {
     
     boxes.forEach((box, index) => {
         setTimeout(() => {
-            // Random sticker for this box
-            const randomSticker = stickerPool[Math.floor(Math.random() * stickerPool.length)];
+            // Random sticker for this box - truly random each time!
+            const randomSticker = getRandomSticker();
             stickers.push(randomSticker);
             
             // Create opening animation
