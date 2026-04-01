@@ -40,7 +40,7 @@ const gameData = {
             image: "assets/images/clock.jpg",
             choices: [
                 { text: "Clock", emoji: "⏰" },
-                { text: "Watch", emoji: "⌚" },
+                { text: "Mirror", emoji: "🪞" },
                 { text: "Moon", emoji: "🌙" },
                 { text: "Sun", emoji: "☀️" }
             ]
