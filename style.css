@@ -516,6 +516,12 @@ h1 {
     object-fit: cover;
     border-radius: 20px;
     margin-bottom: 15px;
+    transition: opacity 0.3s ease;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+}
+
+#answer-img[loading] {
+    animation: pulse 1s infinite;
 }
 
 #answer-text {

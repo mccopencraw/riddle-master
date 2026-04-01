@@ -373,13 +373,33 @@ function checkAnswer(selected, correct, btn) {
     setTimeout(() => showFeedback(isCorrect, gameData[currentLevel][currentQuestion]), 500);
 }
 
-function showFeedback(isCorrect, data) {
+// Preload images to avoid showing previous image
+const preloadedImages = {};
+
+function preloadImage(src) {
+    if (!src || preloadedImages[src]) return Promise.resolve();
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+            preloadedImages[src] = true;
+            resolve();
+        };
+        img.onerror = () => resolve();
+        img.src = src;
+    });
+}
+
+async function showFeedback(isCorrect, data) {
     switchScreen('feedback');
     
     const emoji = document.getElementById('feedback-emoji');
     const title = document.getElementById('feedback-title');
     const img = document.getElementById('answer-img');
     const text = document.getElementById('answer-text');
+    
+    // Clear previous image immediately
+    img.src = '';
+    img.style.opacity = '0';
     
     if (isCorrect) {
         emoji.textContent = '🎉';
@@ -394,9 +414,15 @@ function showFeedback(isCorrect, data) {
         playSound('wrong');
     }
     
-    img.src = data.image || '';
-    img.alt = data.answer;
     text.textContent = `It's ${data.answer}!`;
+    
+    // Preload and show new image
+    if (data.image) {
+        await preloadImage(data.image);
+        img.src = data.image;
+        img.alt = data.answer;
+        img.style.opacity = '1';
+    }
 }
 
 function nextQuestion() {
