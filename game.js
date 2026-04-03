@@ -363,8 +363,18 @@ function startGame(level) {
     gameCompleted = false;
     stickers = [];
     
+    // Safety check for game data
+    if (!gameData[level] || gameData[level].length === 0) {
+        console.error('No game data for level:', level);
+        alert('Error: No questions available for this level.');
+        return;
+    }
+    
     // Shuffle questions for random order
     shuffledQuestions = shuffleArray(gameData[level]);
+    
+    // Take only first 10 questions
+    shuffledQuestions = shuffledQuestions.slice(0, 10);
 
     // Update UI
     document.getElementById('level-indicator').textContent = 
@@ -377,7 +387,20 @@ function startGame(level) {
 }
 
 function loadQuestion() {
+    // Safety check
+    if (!shuffledQuestions || shuffledQuestions.length === 0 || currentQuestion >= shuffledQuestions.length) {
+        console.error('No questions available');
+        document.getElementById('riddle-text').textContent = 'Error loading question. Please refresh.';
+        return;
+    }
+    
     const data = shuffledQuestions[currentQuestion];
+    
+    if (!data) {
+        console.error('Question data is undefined');
+        document.getElementById('riddle-text').textContent = 'Error loading question. Please refresh.';
+        return;
+    }
     
     // Update progress
     document.getElementById('progress').textContent = `Question ${currentQuestion + 1}/10`;
